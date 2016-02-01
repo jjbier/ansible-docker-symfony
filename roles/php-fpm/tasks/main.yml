@@ -1,0 +1,11 @@
+---
+# tasks file for php-fpm
+- name: php-fpm container
+  docker:
+    state: started
+    name: php-fpm-server
+    image: 'php:7.0.2-fpm'
+    expose: 9000
+    env:
+      PHP_EXTRA_BUILD_DEPS: 'json intl'
+    tty: true  

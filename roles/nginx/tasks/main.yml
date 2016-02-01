@@ -1,0 +1,36 @@
+---
+# tasks file for nginx
+- name: nginx server container
+  docker:
+    state: started
+    name: nginx-server
+    image: 'nginx:{{nginx_version}}'
+    ports: 
+    - "{{ nginx_docker_ports }}"
+    volumes:
+    - /projects/symfony:/var/www/symfony
+    links: 
+      - php-fpm-server:php-server
+    env:
+      NGINX_HOST: '{{nginx_default_host}}'    
+      NGINX_PORT: '{{nginx_default_host}}'
+    tty: true
+
+- name: backup default conf file
+  connection: docker
+  hosts: nginx-server
+  fetch: 
+    src=/etc/nginx/conf.d/default.conf
+    dest=/etc/nginx/conf.d/default.conf.dist
+    flat=yes
+
+- name: enable php-fpm
+  template:
+    src='symfony.conf.j2'
+    dest='/etc/nginx/conf.d/default.conf'
+    owner=root
+    group=root
+    mode=0644
+  tags:
+  - nginx
+  - webserver 

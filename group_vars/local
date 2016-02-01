@@ -1,0 +1,8 @@
+mysql_env:
+  MYSQL_ROOT_PASSWORD: 'hormiga'
+  MYSQL_DATABASE: 'sayma'
+  MYSQL_USER: 'sayma'
+  MYSQL_PASSWORD: 'sayma'
+  MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+docker_nginx_root_dir: '/var/www/html' 

@@ -1,0 +1,8 @@
+---
+# defaults file for nginx
+nginx_version: '1.9.10'
+nginx_document_root: '/var/www/symfony/web'
+nginx_default_host: symfony.dev
+nginx_defaul_port: 80
+nginx_docker_ports: '80:80'
+nginx_enable_php_fpm: true

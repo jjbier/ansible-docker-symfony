@@ -1,0 +1,9 @@
+---
+# file: group_vars/all
+ntp_servers:
+ - server 0.europe.pool.ntp.org
+ - server 1.europe.pool.ntp.org
+ - server 2.europe.pool.ntp.org
+ - server 3.europe.pool.ntp.org
+
+backup: backup.instalacionessayma.com
