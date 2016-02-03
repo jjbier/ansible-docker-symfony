@@ -1,15 +1,21 @@
 ---
 # tasks file for nginx
+- name: build image nginx
+  docker_image:
+    path: '{{role_path}}/docker'
+    name: 'fobos/nginx'
+    state: build
+    tag: 1.9.10
 - name: nginx server container
   docker:
-    state: started
+    state: reloaded
     name: nginx-server
-    image: 'nginx:{{nginx_version}}'
-    command: /bin/bash -c "envsubst < {{role_path}}/default.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    image: 'fobos/nginx:1.9.10'
+    hostname: '{{nginx_default_host}}'
     ports: 
     - "{{ nginx_docker_ports }}"
-    volumes:
-    - /projects/symfony:/var/www/symfony
+    volumes_from:
+    - application-data
     links: 
       - php-fpm-server:php-server
     env:

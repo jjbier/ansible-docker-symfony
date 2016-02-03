@@ -5,7 +5,10 @@
     state: started
     name: php-fpm-server
     image: 'php:7.0.2-fpm'
-    expose: 9000
+    expose: "9000"
+    volumes_from:
+    - application-data
+    hostname: php-server
     env:
       PHP_EXTRA_BUILD_DEPS: 'json intl'
     tty: true  
